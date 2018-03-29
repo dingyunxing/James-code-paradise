@@ -486,9 +486,12 @@ def predict(dataframe, x_name_list, y_variable, c):
 #
 # **********************************************************************
 
-def main():
-    '''the main function'''
-    dataframe = entrance()   # read the file and display the dataframe
+
+
+
+
+if __name__ == '__main__':
+    dataframe = entrance()  # read the file and display the dataframe
     # Define x and y varialbes and the corresponding data matrix
     y_matrix, y_variable = y_input_operate(dataframe)
     print("You have selected {} as the responce varialbe".format(y_variable))
@@ -502,7 +505,5 @@ def main():
     print("Control varialbes are {}".format(x_name_list))
     # predict or quit
     predict(dataframe, x_name_list, y_variable, c)
-
-
-main()
+    
    
