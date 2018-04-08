@@ -14,6 +14,8 @@
 import numpy as np
 import random
 import time
+from GradientDescent import GradientDescent
+
 
 # Define an very large error, used for initial difference between errors
 ERROR = 999999999999
@@ -311,6 +313,7 @@ def data_split_process(dataframe, y_matrix, x_matrix):
 #
 # **********************************************************************
 
+
 def OLS(y, x):
     '''a functon to calculate the coefficient of each feature
     return beta, which is a matrix of coefficients of all the control variables
@@ -322,12 +325,15 @@ def OLS(y, x):
     beta = (np.mat(x_square_mat).I).dot(x_trans_y)
     return beta
 
-
 def test_diff(y, x, y_test, x_test):
     '''a funtion to calculate the the difference on test set.
     return a tuple with difference and coefficient
     '''
-    coeff = OLS(y, x)
+    
+    if alg == "O":
+        coeff = OLS(y, x)
+    else:
+        coeff = GradientDescent(y, x)
     diff = 0
     for i in range(len(y_test)):
         diff += (y_test[i] - (coeff.dot(x_test[i].T))) ** 2
@@ -480,6 +486,7 @@ def predict(dataframe, x_name_list, y_variable, c):
     print("the final predict {} value is:".format(y_variable), predict_y)
     quit_or_predict(dataframe, x_name_list, y_variable, c)  
 
+
 # **********************************************************************
 #
 # Now at last the main function and the call to it
@@ -489,12 +496,13 @@ def predict(dataframe, x_name_list, y_variable, c):
 
 
 
-
 if __name__ == '__main__':
     dataframe = entrance()  # read the file and display the dataframe
     # Define x and y varialbes and the corresponding data matrix
     y_matrix, y_variable = y_input_operate(dataframe)
     print("You have selected {} as the responce varialbe".format(y_variable))
+    global alg
+    alg = input("OLS or GradientDescent? (O/G) ")
     x_num_list, x_name_list = x_num_list_generate(dataframe)
     x_matrix = get_x_matrix(dataframe, x_num_list)
     control_varialbe_show(x_num_list, x_name_list)
