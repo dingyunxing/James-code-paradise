@@ -1,4 +1,7 @@
 import numpy as np
+from sklearn import preprocessing
+
+
 def GradientDescent(y, x):
     '''a functon to calculate the coefficient of each feature with gradient 
     descent
@@ -9,6 +12,8 @@ def GradientDescent(y, x):
     m = len(x) # how many rows of data
     beta = np.ones(l)
     x = np.array(x)
+    # feature scaling and mean normalization
+    x = preprocessing.scale(x)  
     y = np.array(y)
     
     # formular: beta = (X.T*X)-1 * X.T *Y
@@ -30,7 +35,4 @@ def GradientDescent(y, x):
         print(difference)
         i += 1
     return beta
-
-
-
 

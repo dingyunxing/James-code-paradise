@@ -14,7 +14,7 @@
 import numpy as np
 import random
 import time
-from GradientDescent import GradientDescent
+from gradient_descent import GradientDescent
 
 
 # Define an very large error, used for initial difference between errors
